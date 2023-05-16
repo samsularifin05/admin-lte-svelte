@@ -1,10 +1,10 @@
-import { About, Dashboard } from "../../pages";
+import { About, Dashboard, Login, PageNotFound } from "../../pages";
 
 const MenuRoutes = [
   {
     path: "/",
-    title: "Dashboard",
-    component: Dashboard
+    title: "Login",
+    component: Login
   },
   {
     path: "/dashboard",
@@ -16,6 +16,13 @@ const MenuRoutes = [
     exact: true,
     title: "About",
     component: About
+  },
+
+  {
+    path: "*",
+    exact: true,
+    title: "Halaman Tidak Ditemukan",
+    component: PageNotFound
   }
 ];
 

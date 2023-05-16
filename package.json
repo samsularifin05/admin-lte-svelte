@@ -17,7 +17,6 @@
   "dependencies": {
     "redux": "^4.2.1",
     "redux-form": "^8.3.10",
-    "svelte-navigator": "^3.2.2",
     "svelte-routing": "^1.8.8"
   }
 }

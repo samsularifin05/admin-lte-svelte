@@ -1,6 +1,6 @@
 <script>
   export let footer = "";
-  export let title;
+  export let title = "";
 </script>
 
 <div class="card">

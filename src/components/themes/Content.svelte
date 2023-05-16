@@ -4,9 +4,7 @@
 </script>
 
 <Router>
-  <div class="content-wrapper">
-    {#each MenuRoutes as item}
-      <Route path={item.path} component={item.component} />
-    {/each}
-  </div>
+  {#each MenuRoutes as item}
+    <Route path={item.path} component={item.component} />
+  {/each}
 </Router>

@@ -16,7 +16,6 @@
   const windowSize = useWindowSize();
 
   let screenSize = calculateWindowSize(window.innerWidth);
-  let SizeValue = screenSize;
 
   const handleToggleMenuSidebar = () => {
     themeStore.update((storeData) => {
@@ -28,6 +27,8 @@
   };
 
   $: {
+    let SizeValue = screenSize;
+
     removeWindowClass("sidebar-closed");
     removeWindowClass("sidebar-collapse");
     removeWindowClass("sidebar-open");

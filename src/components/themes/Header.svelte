@@ -1,5 +1,6 @@
 <script>
   import { themeStore } from "../../store";
+  import { navigate } from "svelte-routing";
 
   const handleToggleMenuSidebar = () => {
     themeStore.update((storeData) => {
@@ -8,6 +9,19 @@
         menuSidebarCollapsed: !storeData.menuSidebarCollapsed
       };
     });
+  };
+
+  let isHovered = true;
+
+  const toogleShow = () => {
+    isHovered = true;
+  };
+  const toogleClose = () => {
+    isHovered = false;
+  };
+
+  const logout = () => {
+    navigate("/");
   };
 </script>
 
@@ -30,18 +44,24 @@
 
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <div class="nav-link dropdown-toggle user-action">
+      <div
+        class="nav-link dropdown-toggle user-action"
+        on:mouseenter={() => toogleShow()}
+      >
         <img
           src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
           class="avatarProfile"
           alt="Avatar"
         />{" "}
-        Samsul <b class="caret" />
-        <div class="dropdown-menu">
+        <b class="caret" />
+        <div
+          class={`dropdown-menu ${isHovered ? "show" : ""}`}
+          on:mouseleave={() => toogleClose()}
+        >
           <button type="button" class="dropdown-item">
             <i class="fa fa-user" /> Profile
           </button>
-          <button type="button" class="dropdown-item">
+          <button type="button" class="dropdown-item" on:click={() => logout()}>
             <i class="nav-icon fas fa-arrow-right-from-bracket" />{" "}
             Logout
           </button>
