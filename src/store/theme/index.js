@@ -1,12 +1,9 @@
 import { writable } from "svelte/store";
 
-// Inisialisasi data awal
-const initialData = {
+export const themeStore = writable({
   handleSidebar: true,
   handleContent: true,
   handleFooter: true,
-  handleHeader: true
-};
-
-// Buat store untuk menyimpan data
-export const themeStore = writable(initialData);
+  handleHeader: true,
+  menuSidebarCollapsed: false
+});

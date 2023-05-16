@@ -1,5 +1,5 @@
 import { doDecrypt, doEncrypt } from "./Encrypt";
-
+import { onMount, afterUpdate, onDestroy } from "svelte";
 export const getItem = (nama) => {
   return localStorage.getItem(doEncrypt(nama)) === null
     ? []
@@ -36,7 +36,25 @@ export const calculateWindowSize = (windowWidth) => {
   return "xs";
 };
 
-export const useWindowSize = () => {};
+export const useWindowSize = () => {
+  let windowSize = {
+    width: window.innerWidth,
+    height: window.innerHeight
+  };
+
+  onMount(() => {
+    function handleResize() {
+      windowSize = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
+  return windowSize;
+};
 
 export const removeWindowClass = (classList) => {
   const window = document && document.getElementById("app");
