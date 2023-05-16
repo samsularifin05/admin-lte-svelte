@@ -1,8 +1,6 @@
 <script>
   import MenuRoutes from "../router";
-  import { Router, Route } from "svelte-navigator";
-
-  const currentPath = window.location.pathname;
+  import { Router, Route } from "svelte-routing";
 </script>
 
 <Router>

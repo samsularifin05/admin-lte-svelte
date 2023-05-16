@@ -1,7 +1,7 @@
 <script>
   import { Header, Content, Sidebar, Footer } from "./components";
   import { themeStore } from "./store";
-  import { Router } from "svelte-navigator";
+  import { Router } from "svelte-routing";
 </script>
 
 <Router>

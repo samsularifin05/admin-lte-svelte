@@ -39,7 +39,7 @@ const menu = [
         icon: "nav-icon fas far fa-circle nav-icon",
         children: [
           {
-            path: "#",
+            path: "/about",
             title: "Sub Level 2"
           },
           {
