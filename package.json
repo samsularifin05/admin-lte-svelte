@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "overlayscrollbars": "^2.11.1",
-    "svelte-spa-router": "^4.0.1"
+    "svelte-spa-router": "^4.0.1",
+    "zustand": "^5.0.3"
   }
 }
