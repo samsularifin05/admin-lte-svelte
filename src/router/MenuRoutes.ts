@@ -1,4 +1,6 @@
-import { About, Dashboard, Login, PageNotFound } from "../../pages";
+import Login from "../pages/login/index.svelte";
+import Dashboard from "../pages/dashboard/index.svelte";
+import About from "../pages/about/index.svelte";
 
 const MenuRoutes = [
   {
@@ -7,7 +9,7 @@ const MenuRoutes = [
     component: Login
   },
   {
-    path: "/dashboard",
+    path: "/",
     title: "dashboard",
     component: Dashboard
   },
@@ -16,13 +18,6 @@ const MenuRoutes = [
     exact: true,
     title: "About",
     component: About
-  },
-
-  {
-    path: "*",
-    exact: true,
-    title: "Halaman Tidak Ditemukan",
-    component: PageNotFound
   }
 ];
 

@@ -1,8 +1,8 @@
-import "./assets/css/index.css";
+import { mount } from "svelte";
 import App from "./App.svelte";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/index.css";
 
-const app = new App({
+const app = mount(App, {
   target: document.getElementById("app")
 });
 

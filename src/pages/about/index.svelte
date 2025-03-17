@@ -1,5 +1,5 @@
 <script>
-  import { Panel } from "../../components";
+  import PanelContent from "../../lib/theme/PanelContent.svelte";
 </script>
 
-<Panel title="About">About</Panel>
+<PanelContent headerContent>ABOUT</PanelContent>
