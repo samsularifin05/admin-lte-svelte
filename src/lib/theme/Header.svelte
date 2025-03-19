@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { sidebarState, screenSizeState } from "../../store/utils/utils";
+  import { sidebarState } from "../../store/utils/utils";
 
   const handleToggleMenuSidebar = () => {
     $sidebarState.toggleSidebar();
