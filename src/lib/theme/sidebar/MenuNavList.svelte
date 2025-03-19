@@ -13,8 +13,12 @@
 
   $: currentMenuRef = actiVeMenu === "active" ? submenuRef : mainMenuRef;
 
-  const handleMainMenuAction = (event: MouseEvent) => {
-    event.preventDefault();
+  const handleMainMenuAction = (
+    event: MouseEvent | KeyboardEvent | HTMLAnchorElement
+  ) => {
+    if (event instanceof MouseEvent || event instanceof KeyboardEvent) {
+      event.preventDefault(); // Aman karena hanya MouseEvent & KeyboardEvent yang memiliki metode ini
+    }
     isMenuExtended = !isMenuExtended;
   };
 

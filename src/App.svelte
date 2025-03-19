@@ -57,7 +57,7 @@
 
 <div class="app-wrapper">
   <Sidebar />
-  <main class="app-main">
+  <main class="app-main" style="height: 100vh; overflow: auto;">
     <Header />
     <Router {routes} />
   </main>

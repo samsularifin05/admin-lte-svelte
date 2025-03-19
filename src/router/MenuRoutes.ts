@@ -9,7 +9,7 @@ const MenuRoutes = [
     component: Login
   },
   {
-    path: "/",
+    path: "/dashboard",
     title: "dashboard",
     component: Dashboard
   },
