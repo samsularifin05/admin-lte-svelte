@@ -4,56 +4,55 @@
   import Sidebar from "./lib/theme/sidebar/Sidebar.svelte";
   import Router from "svelte-spa-router";
   import MenuRoutes from "./router/MenuRoutes";
-  import {
-    useLoadingStore,
-    useScreenSizeStore,
-    useSidebarStore,
-    toggleSidebar
-  } from "./store/utils/utils";
+  import { sidebarState, screenSizeState } from "./store/utils/utils";
   import {
     addWindowClass,
     calculateWindowSize,
-    removeWindowClass
+    removeWindowClass,
+    useWindowSize
   } from "./lib/utils/utils";
 
-  // Definisikan routes
   const routes = MenuRoutes.reduce((acc, route) => {
     acc[route.path] = route.component;
     return acc;
   }, {});
 
-  // Ambil nilai dari store
-  let $screenSize, $menuSidebarCollapsed;
-  $: $screenSize = useScreenSizeStore;
-  $: $menuSidebarCollapsed = useSidebarStore.menuSidebarCollapsed;
+  const windowSize = useWindowSize();
 
-  // Fungsi untuk toggle sidebar
-  const handleToggleMenuSidebar = () => {
-    toggleSidebar();
-  };
-
-  // Efek reaktif untuk menyesuaikan class berdasarkan ukuran layar dan status sidebar
   $: {
     removeWindowClass("sidebar-closed");
     removeWindowClass("sidebar-collapse");
     removeWindowClass("sidebar-open");
     removeWindowClass("sidebar-expand-lg");
 
-    const size = calculateWindowSize(window.innerWidth);
-    if ($screenSize.screenSize !== size) {
-      useScreenSizeStore.setScreenSize(size);
+    const size = calculateWindowSize($windowSize.width);
+    if ($screenSizeState.screenSize !== size) {
+      $screenSizeState.setScreenSize(size);
     }
 
-    if ($menuSidebarCollapsed && $screenSize.screenSize === "lg") {
+    if (
+      $sidebarState.menuSidebarCollapsed &&
+      $screenSizeState.screenSize === "lg"
+    ) {
       addWindowClass("sidebar-collapse");
-    } else if ($menuSidebarCollapsed && $screenSize.screenSize === "xs") {
+    } else if (
+      $sidebarState.menuSidebarCollapsed &&
+      $screenSizeState.screenSize === "xs"
+    ) {
       addWindowClass("sidebar-open");
       addWindowClass("sidebar-expand-lg");
-    } else if (!$menuSidebarCollapsed && $screenSize.screenSize !== "lg") {
+    } else if (
+      !$sidebarState.menuSidebarCollapsed &&
+      $screenSizeState.screenSize !== "lg"
+    ) {
       addWindowClass("sidebar-closed");
       addWindowClass("sidebar-collapse");
     }
   }
+
+  const handleToggleMenuSidebar = () => {
+    $sidebarState.toggleSidebar();
+  };
 </script>
 
 <div class="app-wrapper">
@@ -64,7 +63,6 @@
   </main>
   <Footer />
 </div>
-
 <div
   role="button"
   tabindex="0"

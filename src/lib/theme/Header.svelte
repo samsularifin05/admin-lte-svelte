@@ -1,8 +1,20 @@
+<script lang="ts">
+  import { sidebarState, screenSizeState } from "../../store/utils/utils";
+
+  const handleToggleMenuSidebar = () => {
+    $sidebarState.toggleSidebar();
+  };
+</script>
+
 <nav class="app-header navbar navbar-expand bg-body">
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <button class="nav-link btn btn-link" aria-label="Toggle Sidebar">
+        <button
+          class="nav-link btn btn-link"
+          aria-label="Toggle Sidebar"
+          on:click={handleToggleMenuSidebar}
+        >
           <i class="fas fa-bars"></i>
         </button>
       </li>

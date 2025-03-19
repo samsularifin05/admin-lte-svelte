@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { readable, writable } from "svelte/store";
 import { calculateWindowSize } from "../../lib/utils/utils";
 
 interface LoadingModel {
@@ -23,41 +23,78 @@ interface SidebarState {
   toggleSidebar: () => void;
 }
 
-export const useLoadingStore = create<{
-  loading: LoadingModel;
-  setLoading: (newLoading: Partial<LoadingModel>) => void;
-}>((set) => ({
-  loading: {
-    button: false,
-    content: false,
-    tabel: false
-  },
-  setLoading: (newLoading) =>
-    set((state) => ({ loading: { ...state.loading, ...newLoading } }))
-}));
+// Gunakan writable agar bisa diperbarui
+export const loading = writable<LoadingModel>({
+  content: false,
+  button: false,
+  tabel: false
+});
 
-export const useModalStore = create<{
-  modal: ModelModal;
-  setModal: (newModal: Partial<ModelModal>) => void;
-}>((set) => ({
-  modal: {
-    isModalShow: false,
-    isEdit: false,
-    data: []
-  },
-  setModal: (newModal) =>
-    set((state) => ({ modal: { ...state.modal, ...newModal } }))
-}));
+// Gunakan writable agar modal bisa berubah
+export const modalState = writable<ModelModal>({
+  isModalShow: false,
+  isEdit: false,
+  data: null
+});
 
-export const useScreenSizeStore = create<ScreenSizeState>((set) => ({
+// Gunakan writable agar ukuran layar bisa berubah
+export const screenSizeState = writable<ScreenSizeState>({
   screenSize: calculateWindowSize(
     typeof window !== "undefined" ? window.innerWidth : 0
   ),
-  setScreenSize: (width) => set({ screenSize: width })
-}));
+  setScreenSize: (width: string) => {
+    screenSizeState.update((state) => ({ ...state, screenSize: width }));
+  }
+});
 
-export const useSidebarStore = create<SidebarState>((set) => ({
+// Gunakan writable agar sidebar bisa di-toggle
+export const sidebarState = writable<SidebarState>({
   menuSidebarCollapsed: false,
-  toggleSidebar: () =>
-    set((state) => ({ menuSidebarCollapsed: !state.menuSidebarCollapsed }))
-}));
+  toggleSidebar: () => {
+    sidebarState.update((state) => ({
+      ...state,
+      menuSidebarCollapsed: !state.menuSidebarCollapsed
+    }));
+  }
+});
+
+// import { create } from "zustand";
+
+// export const useLoadingStore = create<{
+//   loading: LoadingModel;
+//   setLoading: (newLoading: Partial<LoadingModel>) => void;
+// }>((set) => ({
+//   loading: {
+//     button: false,
+//     content: false,
+//     tabel: false
+//   },
+//   setLoading: (newLoading) =>
+//     set((state) => ({ loading: { ...state.loading, ...newLoading } }))
+// }));
+
+// export const useModalStore = create<{
+//   modal: ModelModal;
+//   setModal: (newModal: Partial<ModelModal>) => void;
+// }>((set) => ({
+//   modal: {
+//     isModalShow: false,
+//     isEdit: false,
+//     data: []
+//   },
+//   setModal: (newModal) =>
+//     set((state) => ({ modal: { ...state.modal, ...newModal } }))
+// }));
+
+// export const useScreenSizeStore = create<ScreenSizeState>((set) => ({
+//   screenSize: calculateWindowSize(
+//     typeof window !== "undefined" ? window.innerWidth : 0
+//   ),
+//   setScreenSize: (width) => set({ screenSize: width })
+// }));
+
+// export const useSidebarStore = create<SidebarState>((set) => ({
+//   menuSidebarCollapsed: false,
+//   toggleSidebar: () =>
+//     set((state) => ({ menuSidebarCollapsed: !state.menuSidebarCollapsed }))
+// }));
